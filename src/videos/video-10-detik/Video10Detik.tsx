@@ -1,9 +1,12 @@
 import {
   AbsoluteFill,
+  Audio,
   Composition,
   Easing,
   interpolate,
+  Sequence,
   spring,
+  staticFile,
   useCurrentFrame,
   useVideoConfig,
 } from "remotion";
@@ -558,6 +561,24 @@ export const Video10DetikScene: React.FC = () => {
       </AbsoluteFill>
 
       <ProgressBar />
+
+      <Audio
+        src={staticFile("videos/video-10-detik/audio/musik.wav")}
+        volume={(f) =>
+          interpolate(f, [0, 20, 240, 300], [0, 0.5, 0.5, 0], clamp)
+        }
+      />
+
+      {[4, 112, 200].map((from) => (
+        <Sequence key={from} from={from} durationInFrames={30}>
+          <Audio
+            src={staticFile("audio/whoosh.wav")}
+            volume={(f) =>
+              interpolate(f, [0, 5, 24, 30], [0, 0.22, 0.22, 0], clamp)
+            }
+          />
+        </Sequence>
+      ))}
     </AbsoluteFill>
   );
 };

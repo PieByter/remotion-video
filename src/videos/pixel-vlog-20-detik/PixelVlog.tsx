@@ -1,11 +1,13 @@
 import { useEffect, useState } from "react";
 import {
   AbsoluteFill,
+  Audio,
   Composition,
   continueRender,
   delayRender,
   Easing,
   interpolate,
+  Sequence,
   spring,
   staticFile,
   useCurrentFrame,
@@ -1392,6 +1394,55 @@ export const PixelVlog: React.FC = () => {
       <IntroTitle />
       <EndTitle />
       <Timeline />
+
+      <Audio
+        src={staticFile("videos/pixel-vlog-20-detik/audio/musik.wav")}
+        volume={(f) =>
+          interpolate(f, [0, 30, 560, 600], [0, 0.55, 0.55, 0], clamp)
+        }
+      />
+
+      <Sequence durationInFrames={214}>
+        <Audio
+          src={staticFile(
+            "videos/pixel-vlog-20-detik/audio/sunset-waves.wav",
+          )}
+          volume={(f) =>
+            interpolate(f, [0, 18, 196, 214], [0, 0.32, 0.32, 0], clamp)
+          }
+        />
+      </Sequence>
+
+      <Sequence from={198} durationInFrames={210}>
+        <Audio
+          src={staticFile(
+            "videos/pixel-vlog-20-detik/audio/night-campfire.wav",
+          )}
+          volume={(f) =>
+            interpolate(f, [0, 18, 192, 210], [0, 0.38, 0.38, 0], clamp)
+          }
+        />
+      </Sequence>
+
+      <Sequence from={390} durationInFrames={210}>
+        <Audio
+          src={staticFile("videos/pixel-vlog-20-detik/audio/dawn-birds.wav")}
+          volume={(f) =>
+            interpolate(f, [0, 18, 192, 210], [0, 0.34, 0.34, 0], clamp)
+          }
+        />
+      </Sequence>
+
+      {[6, 508].map((from) => (
+        <Sequence key={from} from={from} durationInFrames={30}>
+          <Audio
+            src={staticFile("audio/whoosh.wav")}
+            volume={(f) =>
+              interpolate(f, [0, 5, 24, 30], [0, 0.18, 0.18, 0], clamp)
+            }
+          />
+        </Sequence>
+      ))}
     </AbsoluteFill>
   );
 };

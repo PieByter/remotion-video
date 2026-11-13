@@ -28,6 +28,7 @@
     "upgrade": "remotion upgrade",
     "lint": "eslint src && tsc",
     "compositions": "remotion compositions",
+    "generate:audio": "node scripts/generate-audio.mjs",
     "render:video10": "remotion render Video10Detik out/video-10-detik.mp4",
     "render:pixelvlog": "remotion render PixelVlog20Detik out/pixel-vlog-20-detik.mp4",
     "render:all": "npm run render:video10 && npm run render:pixelvlog"

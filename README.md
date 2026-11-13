@@ -242,8 +242,28 @@ import { Audio, Img, OffthreadVideo, staticFile } from "remotion";
   `FontFace` / `staticFile()`. Contohnya ada di
   `src/videos/pixel-vlog-20-detik/PixelVlog.tsx`.
 
-Video yang sekarang ada belum memiliki audio. Untuk menambahkan musik, import
-`<Audio>` seperti contoh di atas dan pastikan file audio sudah ada di `public/`.
+### Audio yang sudah tersedia
+
+Kedua video sudah memiliki audio hasil sintesis dari
+`scripts/generate-audio.mjs`:
+
+| File | Dipakai di | Isi |
+| --- | --- | --- |
+| `public/videos/video-10-detik/audio/musik.wav` | `Video10Detik` | Ambient synth 10 detik |
+| `public/videos/pixel-vlog-20-detik/audio/musik.wav` | `PixelVlog20Detik` | Chiptune 20 detik |
+| `public/videos/pixel-vlog-20-detik/audio/sunset-waves.wav` | `PixelVlog20Detik` | Ombak senja |
+| `public/videos/pixel-vlog-20-detik/audio/night-campfire.wav` | `PixelVlog20Detik` | Jangkrik + api unggun |
+| `public/videos/pixel-vlog-20-detik/audio/dawn-birds.wav` | `PixelVlog20Detik` | Burung + angin pagi |
+| `public/audio/whoosh.wav` | Keduanya | Transisi |
+
+Generate ulang semua audio kapan saja:
+
+```console
+npm run generate:audio
+```
+
+Script akan menimpa file WAV dengan nama yang sama. Kalau ingin memakai musik
+atau SFX sendiri, ganti file tersebut atau ubah path di `staticFile()`.
 
 ## Struktur folder
 
@@ -258,10 +278,22 @@ my-video/
 │     └─ pixel-vlog-20-detik/
 │        └─ PixelVlog.tsx
 ├─ public/
+│  ├─ audio/
+│  │  └─ whoosh.wav
 │  └─ videos/
+│     ├─ video-10-detik/
+│     │  └─ audio/
+│     │     └─ musik.wav
 │     └─ pixel-vlog-20-detik/
+│        ├─ audio/
+│        │  ├─ musik.wav
+│        │  ├─ sunset-waves.wav
+│        │  ├─ night-campfire.wav
+│        │  └─ dawn-birds.wav
 │        └─ fonts/
 │           └─ PressStart2P-Regular.ttf
+├─ scripts/
+│  └─ generate-audio.mjs
 ├─ out/                  ← hasil export (tidak masuk Git)
 ├─ package.json
 ├─ remotion.config.ts
@@ -297,6 +329,7 @@ git commit -m "Tambah video dan dokumentasi export"
 | --- | --- |
 | `npm run dev` | Buka Remotion Studio untuk preview |
 | `npm run compositions` | Tampilkan semua Composition ID |
+| `npm run generate:audio` | Generate ulang musik dan SFX WAV |
 | `npm run lint` | Cek TypeScript dan aturan ESLint |
 | `npm run build` | Bundle project untuk deployment (bukan export MP4) |
 | `npm run upgrade` | Upgrade Remotion |
